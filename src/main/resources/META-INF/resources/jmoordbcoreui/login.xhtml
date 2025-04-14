@@ -7,23 +7,26 @@
       xmlns:c="jakarta.tags.core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <composite:interface >
-        
+
         <!-- 
         Controller
-          -->
+        -->
         <composite:attribute name="controller" type="java.lang.Object"/> 
-        
-         <composite:attribute name="loginAction2"  
+
+        <composite:attribute name="loginAction2"  
                              method-signature="java.lang.String login()" />
-          <composite:attribute name="loginAction"  
+        <composite:attribute name="loginAction"  
                              default="login" />
 
-          
-          <!--
-          Renderer 
-          -->
-          
-      
+        <!--<composite:attribute name="action" method-signature="java.lang.String action()" />-->
+
+
+        <composite:attribute name="action" type="java.lang.Object"/>
+        <!--
+        Renderer 
+        -->
+
+
         <composite:attribute name="signOtherAccountsRendered" default="true"/>
         <!--
         CommandButton
@@ -57,11 +60,11 @@
 
     </composite:interface>
     <composite:implementation>
-<!--        <div id="loading">
-            <div class="loader simple-loader">
-                <div class="loader-body"></div>
-            </div>    
-        </div>-->
+        <!--        <div id="loading">
+                    <div class="loader simple-loader">
+                        <div class="loader-body"></div>
+                    </div>    
+                </div>-->
         <!-- loader END -->
 
         <div class="wrapper">
@@ -123,16 +126,21 @@
                                                              action="#{cc.attrs.controller[cc.attrs.loginAction]}"
                                                              icon="pi pi-user"
                                                              class="btn btn-primary"/>
-                                            
+
                                             <p:commandButton value ="#{cc.attrs.signButton} 2" 
                                                              action="#{cc.attrs.controller[cc.attrs.loginAction2]}"
                                                              class="btn btn-primary"/>
-                                             <p:commandButton value ="LoginX" 
-                                 action="#{loginController.login()}"
-                                 update="growl"
-                                 class="btn btn-primary"/>
-
+                                            <p:commandButton value ="LoginX" 
+                                                             action="#{loginController.login()}"
+                                                             update="growl"
+                                                             class="btn btn-primary"/>
                                             
+                                            <p:commandButton value ="LoginMaster" 
+                                                             action="#{cc.attrs.action.login()}"
+                                                             update="growl"
+                                                             class="btn btn-primary"/>
+
+
                                         </div>
 
                                         <c:if test="${cc.attrs.signOtherAccountsRendered eq true}">
