@@ -1,32 +1,30 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:composite="http://java.sun.com/jsf/composite"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces"          
       xmlns:c="jakarta.tags.core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:composite="jakarta.faces.composite"
+      xmlns:f="jakarta.faces.core">
     <composite:interface >
-
+        <!--design = simple, profile-->
+        <composite:attribute name="design" default="simple"/> 
+        <composite:attribute name="username" type="java.lang.Object"/> 
+        <composite:attribute name="password"  type="java.lang.Object" />
+        <composite:attribute name="profileSelected"  type="java.lang.Object" />
+        
         <!-- 
         Controller
         -->
         <composite:attribute name="controller" type="java.lang.Object"/> 
+        <composite:attribute name="loginAction"  default="login" />
+        <composite:attribute name="olvidoPasswordAction"  default="login" />
+        <composite:attribute name="registrarseAction"  default="login" />
+        
 
-        <composite:attribute name="loginAction2"  
-                             method-signature="java.lang.String login()" />
-        <composite:attribute name="loginAction"  
-                             default="login" />
-
-        <!--<composite:attribute name="action" method-signature="java.lang.String action()" />-->
-
-
-        <composite:attribute name="action" type="java.lang.Object"/>
         <!--
         Renderer 
         -->
-
-
         <composite:attribute name="signOtherAccountsRendered" default="true"/>
         <!--
         CommandButton
@@ -36,6 +34,7 @@
         Label
         -->
         <composite:attribute name="title" default="Cargo Dev UI"/>
+        <composite:attribute name="profileLabel" default="Perfil"/>
         <composite:attribute name="subtitle" default="Sign in"/>
         <composite:attribute name="subtitle2" default="Iniciar sesión para permanecer conectado."/>
         <composite:attribute name="usernameLabel" default="Email"/>
@@ -103,13 +102,16 @@
                                                 <div class="form-group">
                                                     <label for="email" class="form-label">#{cc.attrs.usernameLabel}</label>
                                                     <!--<input type="email" class="form-control" id="email" aria-describedby="email" placeholder=" "/>-->
-                                                    <p:inputText  placeholder="#{cc.attrs.usernameLabel}" class="form-control"/>
+                                                    <p:inputText  placeholder="#{cc.attrs.usernameLabel}" class="form-control"
+                                                                  value="#{cc.attrs.controller[cc.attrs.username]}"/>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label for="password" class="form-label">#{cc.attrs.passwordLabel}</label>
-                                                    <p:inputText  class="form-control" id="password"  placeholder="#{cc.attrs.passwordLabel}"/>
+                                                    <p:inputText  class="form-control" id="password"  placeholder="#{cc.attrs.passwordLabel}"
+                                                                 value="#{cc.attrs.controller[cc.attrs.password]}"
+                                                                  />
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 d-flex justify-content-between">
@@ -118,28 +120,32 @@
                                                     <label class="form-check-label" for="customCheck1">#{cc.attrs.rememberLabel}</label>
                                                 </div>
                                                 <a href="recoverpw.html">#{cc.attrs.forgotPasswordLabel}</a>
-                                            </div>
+                                            </div>                                                              
                                         </div>
 
+                                        <c:if test="${cc.attrs.design eq 'profile'}">
+                                            <div class="ui-fluid formgrid grid">
+                                                <div class="field col-12 md:col-4">
+                                                    <p:outputLabel for="@next" value="#{cc.attrs.profileLabelê}"/>
+                                                    <p:selectOneMenu id="option" value="#{cc.attrs.controller[cc.attrs.profileSelected]}">
+                                                        <f:selectItem itemLabel="Select One" itemValue=""/>
+                                                        <f:selectItem itemLabel="Option1" itemValue="Option1"/>
+                                                        <f:selectItem itemLabel="Option2" itemValue="Option2"/>
+                                                        <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+                                                        <f:facet name="footer">
+                                                            <p:divider styleClass="mt-0" />
+                                                            <h:outputText value="3 options" style="font-weight:bold;"/>
+                                                        </f:facet>
+                                                    </p:selectOneMenu>
+                                                </div>
+                                            </div>
+                                        </c:if>
                                         <div class="d-flex justify-content-center">
                                             <p:commandButton value ="#{cc.attrs.signButton}" 
                                                              action="#{cc.attrs.controller[cc.attrs.loginAction]}"
                                                              icon="pi pi-user"
-                                                             class="btn btn-primary"/>
-
-                                            <p:commandButton value ="#{cc.attrs.signButton} 2" 
-                                                             action="#{cc.attrs.controller[cc.attrs.loginAction2]}"
-                                                             class="btn btn-primary"/>
-                                            <p:commandButton value ="LoginX" 
-                                                             action="#{loginController.login()}"
                                                              update="growl"
                                                              class="btn btn-primary"/>
-                                            
-                                            <p:commandButton value ="LoginMaster" 
-                                                             action="#{cc.attrs.action.login()}"
-                                                             update="growl"
-                                                             class="btn btn-primary"/>
-
 
                                         </div>
 
@@ -180,6 +186,6 @@
             </section>
         </div>
 
-
+        <p:growl id="growl" showDetail="true" />
     </composite:implementation>
 </html>
