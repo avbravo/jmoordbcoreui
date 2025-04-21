@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces"          
+      xmlns:c="jakarta.tags.core"
+      xmlns:composite="jakarta.faces.composite"
+      xmlns:f="jakarta.faces.core"
+      >
+
+    <!-- INTERFACE -->
+    <composite:interface >
+        <composite:attribute name="id" default=""/>
+        <composite:attribute name="href" default=""/>
+        <composite:attribute name="aria-controls" default=""/>
+        <composite:attribute name="rendered" default=""/>
+        <composite:attribute name="role" default=""/>
+        <composite:attribute name="min-value" default=""/>
+        <composite:attribute name="value" default=""/>
+
+          <!--typeIcon = svg, circle, primefaces-->
+        <composite:attribute name="typeIcon" default=""/>
+        <composite:attribute name="icon" default="pi pi-clock"/>
+        <composite:attribute name="svgLibrary" default="jmoordbcoreui"/>
+        <composite:attribute name="svgName" default="images/svg/dashboard.svg"/>
+        +
+    </composite:interface>
+
+    <!-- IMPLEMENTATION -->
+    <composite:implementation>
+
+        <a class="nav-link" data-bs-toggle="collapse" href="#{cc.attrs.href}" role="button" aria-expanded="false" aria-controls="#{cc.attrs.aria-controls}">
+            <i class="icon">
+                <c:if test="${cc.attrs.typeIcon eq 'circle'}">
+                    <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                        <g>
+                            <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                        </g>
+                    </svg>
+                </c:if>
+                <c:if test="${cc.attrs.typeIcon eq 'svg'}">
+                  <h:graphicImage library="#{cc.attrs.svgLibrary}" name="#{cc.attrs.svgName}" />
+                </c:if>
+                
+                  <c:if test="${cc.attrs.typeIcon eq 'primefaces'}">
+                        <i class="#{cc.attrs.icon}"></i>  
+                    </c:if>
+
+            </i>
+            <i class="sidenav-mini-icon"> #{cc.attrs.min-value} </i>
+            <span class="item-name">#{cc.attrs.value}</span>
+            <i class="right-icon">
+                <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </i>
+        </a>
+    </composite:implementation>
+</html>
