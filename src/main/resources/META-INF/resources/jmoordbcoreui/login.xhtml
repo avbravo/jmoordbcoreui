@@ -9,10 +9,11 @@
     <composite:interface >
         <!--design = simple, profile-->
         <composite:attribute name="design" default="simple"/> 
-        <composite:attribute name="username" type="java.lang.Object"/> 
-        <composite:attribute name="password"  type="java.lang.Object" />
+        <composite:attribute name="usernameField" type="java.lang.Object"/> 
+        <composite:attribute name="passwordField"  type="java.lang.Object" />
+        <composite:attribute name="rememberMeField"  type="java.lang.Object" />
         <composite:attribute name="profileSelected"  type="java.lang.Object" />
-        
+
         <!-- 
         Controller
         -->
@@ -20,7 +21,7 @@
         <composite:attribute name="loginAction"  default="login" />
         <composite:attribute name="olvidoPasswordAction"  default="login" />
         <composite:attribute name="registrarseAction"  default="login" />
-        
+
 
         <!--
         Renderer 
@@ -29,7 +30,7 @@
         <!--
         CommandButton
         -->
-        <composite:attribute name="signButton" default="Iniciar Sesión"/>
+        <composite:attribute name="signButtonLabel" default="Iniciar Sesión"/>
         <!--
         Label
         -->
@@ -59,13 +60,6 @@
 
     </composite:interface>
     <composite:implementation>
-        <!--        <div id="loading">
-                    <div class="loader simple-loader">
-                        <div class="loader-body"></div>
-                    </div>    
-                </div>-->
-        <!-- loader END -->
-
         <div class="wrapper">
             <section class="login-content">
 
@@ -101,32 +95,30 @@
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label for="email" class="form-label">#{cc.attrs.usernameLabel}</label>
-                                                    <!--<input type="email" class="form-control" id="email" aria-describedby="email" placeholder=" "/>-->
                                                     <p:inputText  placeholder="#{cc.attrs.usernameLabel}" class="form-control"
-                                                                  value="#{cc.attrs.controller[cc.attrs.username]}"/>
+                                                                  value="#{cc.attrs.controller[cc.attrs.usernameField]}"/>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <label for="password" class="form-label">#{cc.attrs.passwordLabel}</label>
-                                                    <p:inputText  class="form-control" id="password"  placeholder="#{cc.attrs.passwordLabel}"
-                                                                 value="#{cc.attrs.controller[cc.attrs.password]}"
-                                                                  />
+                                                    <p:password  class="form-control" id="password"  placeholder="#{cc.attrs.passwordLabel}"
+                                                                 value="#{cc.attrs.controller[cc.attrs.passwordField]}"
+                                                                 />
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 d-flex justify-content-between">
                                                 <div class="form-check mb-3">
-                                                    <input type="checkbox" class="form-check-input" id="customCheck1"/>
-                                                    <label class="form-check-label" for="customCheck1">#{cc.attrs.rememberLabel}</label>
+                                                    <p:selectBooleanCheckbox value="#{cc.attrs.rememberMeField}" itemLabel="#{cc.attrs.rememberLabel}"/>
                                                 </div>
-                                                <a href="recoverpw.html">#{cc.attrs.forgotPasswordLabel}</a>
+                                                <a href="recoverypassword.xhtml">#{cc.attrs.forgotPasswordLabel}</a>
                                             </div>                                                              
                                         </div>
 
                                         <c:if test="${cc.attrs.design eq 'profile'}">
                                             <div class="ui-fluid formgrid grid">
                                                 <div class="field col-12 md:col-4">
-                                                    <p:outputLabel for="@next" value="#{cc.attrs.profileLabelê}"/>
+                                                    <p:outputLabel for="@next" value="#{cc.attrs.profileLabel}"/>
                                                     <p:selectOneMenu id="option" value="#{cc.attrs.controller[cc.attrs.profileSelected]}">
                                                         <f:selectItem itemLabel="Select One" itemValue=""/>
                                                         <f:selectItem itemLabel="Option1" itemValue="Option1"/>
@@ -139,9 +131,17 @@
                                                     </p:selectOneMenu>
                                                 </div>
                                             </div>
+                                            <div class="ui-fluid formgrid grid">
+                                                <div class="row">
+
+                                                </div>
+                                                <div class="row">
+
+                                                </div>
+                                            </div>
                                         </c:if>
                                         <div class="d-flex justify-content-center">
-                                            <p:commandButton value ="#{cc.attrs.signButton}" 
+                                            <p:commandButton value ="#{cc.attrs.signButtonLabel}" 
                                                              action="#{cc.attrs.controller[cc.attrs.loginAction]}"
                                                              icon="pi pi-user"
                                                              update="growl"

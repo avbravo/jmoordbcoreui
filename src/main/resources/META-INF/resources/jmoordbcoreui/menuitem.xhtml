@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces"          
+      xmlns:c="jakarta.tags.core"
+      xmlns:composite="jakarta.faces.composite"
+      xmlns:f="jakarta.faces.core"
+      >
+    <composite:interface >
+
+        <composite:attribute name="id" default=""/>
+        <composite:attribute name="rendered" default=""/>
+        <composite:attribute name="role" default=""/>
+        <composite:attribute name="href" default="index.xhtml"/>
+        <composite:attribute name="min-value" default="H"/>
+        <composite:attribute name="value" default=""/>
+        <composite:attribute name="badgespanLabel" default=""/>
+        <composite:attribute name="badgespanType" default="bg-success"/>
+        <!--typeIcon = svg, circle, primefaces-->
+        <composite:attribute name="typeIcon" default="circle"/>
+        <composite:attribute name="icon" default="pi pi-clock"/>
+        <composite:attribute name="svgLibrary" default="jmoordbcoreui"/>
+        <composite:attribute name="svgName" default="images/svg/dashboard.svg"/>
+
+
+
+    </composite:interface>
+    <composite:implementation>
+
+        <li class="nav-item">
+            <a class="nav-link " href="#{cc.attrs.href}">
+                <i class="icon">
+                    <c:if test="${cc.attrs.typeIcon eq 'circle'}">
+                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                            <g>
+                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                            </g>
+                        </svg>
+                    </c:if>
+                    <c:if test="${cc.attrs.typeIcon eq 'svg'}">                                                      
+                        <h:graphicImage library="#{cc.attrs.svgLibrary}" name="#{cc.attrs.svgName}" />
+                    </c:if>
+
+                    <c:if test="${cc.attrs.typeIcon eq 'primefaces'}">
+                        <i class="#{cc.attrs.icon}"></i>  
+                    </c:if>
+
+                </i>
+                <i class="sidenav-mini-icon"> #{cc.attrs.min-value} </i>
+                <c:if test="${cc.attrs.badgespanLabel eq ''}">
+                    <span class="item-name"> #{cc.attrs.value}</span>
+                </c:if>
+                <c:if test="${cc.attrs.badgespanLabel ne ''}">
+                    <span class="item-name"> #{cc.attrs.value} <span class="badge rounded-pill #{cc.attrs.badgespanType} item-name">#{cc.attrs.badgespanLabel}</span> </span>
+
+                </c:if>
+
+            </a>
+        </li>
+
+
+    </composite:implementation>
+</html>
