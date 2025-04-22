@@ -8,7 +8,6 @@
       xmlns:f="jakarta.faces.core"
       >
     <composite:interface >
-
         <composite:attribute name="id" default=""/>
         <composite:attribute name="rendered" default=""/>
         <composite:attribute name="role" default=""/>
@@ -22,12 +21,8 @@
         <composite:attribute name="icon" default="pi pi-clock"/>
         <composite:attribute name="svgLibrary" default="jmoordbcoreui"/>
         <composite:attribute name="svgName" default="images/svg/dashboard.svg"/>
-
-
-
     </composite:interface>
     <composite:implementation>
-
         <li class="nav-item">
             <a class="nav-link " href="#{cc.attrs.href}">
                 <i class="icon">
@@ -53,12 +48,8 @@
                 </c:if>
                 <c:if test="${cc.attrs.badgespanLabel ne ''}">
                     <span class="item-name"> #{cc.attrs.value} <span class="badge rounded-pill #{cc.attrs.badgespanType} item-name">#{cc.attrs.badgespanLabel}</span> </span>
-
                 </c:if>
-
             </a>
         </li>
-
-
     </composite:implementation>
 </html>

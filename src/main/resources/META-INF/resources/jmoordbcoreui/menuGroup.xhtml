@@ -8,26 +8,18 @@
       xmlns:f="jakarta.faces.core"
       >
     <composite:interface >
-
         <composite:attribute name="collapsedLabel" default="-"/>
         <composite:attribute name="normalLabel" default=""/>
         <composite:attribute name="href" default="#"/>
         <composite:attribute name="id" default=""/>
-       
-
 
     </composite:interface>
     <composite:implementation>
-
         <li class="nav-item static-item">
             <a class="nav-link static-item disabled" href="#{cc.attrs.href}" tabindex="-1">
                 <span class="default-icon">#{cc.attrs.normalLabel}</span>
                 <span class="mini-icon">#{cc.attrs.collapsedLabel}</span>
             </a>
         </li>
-
-
-
-
     </composite:implementation>
 </html>
