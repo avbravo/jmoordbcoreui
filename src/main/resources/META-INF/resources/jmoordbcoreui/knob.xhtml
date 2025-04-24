@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces"          
+      xmlns:c="jakarta.tags.core"
+      xmlns:composite="jakarta.faces.composite"
+      xmlns:f="jakarta.faces.core">
+    <composite:interface >
+        <!--design = simple, profile-->
+        <composite:attribute name="percent" default=""/> 
+        <composite:attribute name="label" default=""/> 
+        <composite:attribute name="counter" default=""/> 
+        <!--arrow: up, down-->
+        <composite:attribute name="arrow" default="up"/> 
+        <!--color = primary, info, -->
+        <composite:attribute name="color" default="primary"/> 
+        <composite:attribute name="circleid" default="01" required="true"/> 
+        <composite:attribute name="delay" default="700"/> 
+        <composite:attribute name="up" default="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z"/> 
+        <composite:attribute name="down" default="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z"/> 
+
+
+    </composite:interface>
+    <composite:implementation>
+        <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="#{cc.attrs.delay}">
+            <div class="card-body">
+                <div class="progress-widget"> 
+                    <div id="circle-progress-#{cc.attrs.circleid}" class="text-center circle-progress-01 circle-progress circle-progress-#{cc.attrs.color}" data-min-value="0" data-max-value="100" data-value="#{cc.attrs.percent}" data-type="percent"
+                         title="#{cc.attrs.percent}"
+                         >
+                        <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="#{cc.attrs[cc.attrs.arrow]}" />
+                        </svg> 
+
+                    </div>
+                    <div class="progress-detail">
+                        <p  class="mb-2">#{cc.attrs.label}</p>
+                        <h4 class="counter">#{cc.attrs.counter}</h4>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+    </composite:implementation>
+</html>

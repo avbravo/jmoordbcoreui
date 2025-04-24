@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces"          
+      xmlns:c="jakarta.tags.core"
+      xmlns:composite="jakarta.faces.composite"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+    <composite:interface >
+        <!--design = simple, profile-->
+        <composite:attribute name="percent" default=""/> 
+        <composite:attribute name="label" default=""/> 
+        <composite:attribute name="counter" default=""/> 
+        <!--arrow: up, down-->
+        
+        <composite:attribute name="arrow" default="up"/> 
+        <!--color = primary, info, -->
+        <composite:attribute name="color" default="primary"/> 
+        <composite:attribute name="circleid" default="01" /> 
+        <composite:attribute name="delay" default="700"/> 
+        <composite:attribute name="mtnvalue" default="5"/> 
+        <composite:attribute name="pyvalue" default="0"/> 
+        <composite:attribute name="colmdvalue" default="12"/> 
+        <composite:attribute name="collgvalue" default="12"/> 
+        <composite:attribute name="up" default="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z"/> 
+        <composite:attribute name="down" default="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z"/> 
+
+
+
+
+        <!-- Fields -->
+        <composite:attribute name="knobs" type="java.util.List"/>
+
+
+
+    </composite:interface>
+    <composite:implementation>
+        <div class="conatiner-fluid content-inner mt-n#{cc.attrs.mtnvalue} py-#{cc.attrs.pyvalue}">
+            <div class="row">
+                <div class="col-md-#{cc.attrs.colmdvalue} col-lg-#{cc.attrs.collgvalue}">
+                    <div class="row row-cols-1">
+                        <div class="overflow-hidden d-slider1 ">
+                            <ul  class="p-0 m-0 mb-2 swiper-wrapper list-inline">
+
+                                <ui:repeat value="#{cc.attrs.knobs}" var="k">
+                                    <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="#{k.delay}">
+                                        <div class="card-body">
+                                            <div class="progress-widget"> 
+                                                <div id="circle-progress-#{k.id}" class="text-center circle-progress-01 circle-progress circle-progress-#{k.color}" data-min-value="0" data-max-value="100" data-value="#{k.percent}" data-type="percent"
+                                                     title="#{k.percent}"
+                                                     >
+                                                     <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
+                                                         <path fill="currentColor" d="#{cc.attrs[k.arrow]}" />
+                                                        </svg>                                                    
+                                                </div>
+                                                <div class="progress-detail">
+                                                    <p  class="mb-2">#{k.label}</p>
+                                                    <h4 class="counter">#{k.counter}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ui:repeat>
+
+                            </ul>
+                            <div class="swiper-button swiper-button-next"></div>
+                            <div class="swiper-button swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </composite:implementation>
+</html>
