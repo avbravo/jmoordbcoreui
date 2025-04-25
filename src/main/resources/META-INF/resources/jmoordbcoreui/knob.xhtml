@@ -7,7 +7,6 @@
       xmlns:composite="jakarta.faces.composite"
       xmlns:f="jakarta.faces.core">
     <composite:interface >
-        <!--design = simple, profile-->
         <composite:attribute name="percent" default=""/> 
         <composite:attribute name="label" default=""/> 
         <composite:attribute name="counter" default=""/> 
@@ -26,13 +25,14 @@
         <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="#{cc.attrs.delay}">
             <div class="card-body">
                 <div class="progress-widget"> 
-                    <div id="circle-progress-#{cc.attrs.circleid}" class="text-center circle-progress-01 circle-progress circle-progress-#{cc.attrs.color}" data-min-value="0" data-max-value="100" data-value="#{cc.attrs.percent}" data-type="percent"
-                         title="#{cc.attrs.percent}"
-                         >
+                    <div id="circle-progress-#{cc.attrs.circleid}" 
+                         class="text-center circle-progress-01 circle-progress circle-progress-#{cc.attrs.color}"
+                         data-min-value="0" data-max-value="100" data-value="#{cc.attrs.percent}"
+                         data-type="percent"
+                         title="#{cc.attrs.percent}">
                         <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
                             <path fill="currentColor" d="#{cc.attrs[cc.attrs.arrow]}" />
                         </svg> 
-
                     </div>
                     <div class="progress-detail">
                         <p  class="mb-2">#{cc.attrs.label}</p>
@@ -41,6 +41,5 @@
                 </div>
             </div>
         </li>
-
     </composite:implementation>
 </html>
