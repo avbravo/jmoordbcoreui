@@ -94,9 +94,12 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <label for="email" class="form-label">#{cc.attrs.usernameLabel}</label>
-                                                    <p:inputText  placeholder="#{cc.attrs.usernameLabel}" class="form-control"
-                                                                  value="#{cc.attrs.controller[cc.attrs.usernameField]}"/>
+                                                    <label for="username" class="form-label">#{cc.attrs.usernameLabel}</label>
+                                                    <p:inputText  placeholder="#{cc.attrs.usernameLabel}" 
+                                                                  class="form-control"
+                                                                  value="#{cc.attrs.controller[cc.attrs.usernameField]}"
+                                                                  id="username"
+                                                                  />
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
@@ -145,6 +148,7 @@
                                                              action="#{cc.attrs.controller[cc.attrs.loginAction]}"
                                                              icon="pi pi-user"
                                                              update="growl"
+                                                             id="commandButtonLogin"                                                             
                                                              class="btn btn-primary"/>
 
                                         </div>
