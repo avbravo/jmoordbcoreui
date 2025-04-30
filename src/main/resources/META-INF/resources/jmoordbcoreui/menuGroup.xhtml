@@ -8,7 +8,7 @@
       xmlns:f="jakarta.faces.core"
       >
     <composite:interface >
-        <composite:attribute name="mini-value" default="-"/>
+        <composite:attribute name="mini-icon" default="-"/>
         <composite:attribute name="value" default=""/>
         <composite:attribute name="href" default="#"/>
         <composite:attribute name="id" default=""/>
@@ -18,7 +18,7 @@
         <li class="nav-item static-item">
             <a class="nav-link static-item disabled" href="#{cc.attrs.href}" tabindex="-1">
                 <span class="default-icon">#{cc.attrs.normalLabel}</span>
-                <span class="mini-icon">#{cc.attrs.collapsedLabel}</span>
+                <span class="mini-icon">#{cc.attrs.mini-icon}</span>
             </a>
         </li>
     </composite:implementation>

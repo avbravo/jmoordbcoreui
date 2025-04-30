@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces"          
+      xmlns:c="jakarta.tags.core"
+      xmlns:composite="jakarta.faces.composite"
+      xmlns:f="jakarta.faces.core">
+    <composite:interface >
+     <composite:attribute name="templateBean" type="java.lang.Object"/> 
+
+    </composite:interface>
+    <composite:implementation>
+   <!-- Nav Header Component Start -->
+    <div class="iq-navbar-header" style="height: 215px;">
+        <div class="container-fluid iq-container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="flex-wrap d-flex justify-content-between align-items-center">
+                        <div>
+                            <h1>#{cc.attrs.templateBean.navHeaderTitle}</h1>
+                            <p>#{cc.attrs.templateBean.navHeaderMessage}</p>
+                        </div>
+                        <div>
+                            <a href="#{cc.attrs.templateBean.navHeaderHrefInfo.href}" class="btn btn-link btn-soft-light">
+                                <h:graphicImage library="#{cc.attrs.templateBean.navHeaderImageInfo.library}" name="#{cc.attrs.templateBean.navHeaderImageInfo.name}" />
+                                #{cc.attrs.templateBean.navHeaderHrefInfo.text}
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="iq-header-img">
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header.png" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX"/>
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header1.png" alt="header" class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX"/>
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header2.png" alt="header" class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX"/>
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header3.png" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX"/>
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header4.png" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX"/>
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header5.png" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX"/>
+        </div>
+    </div>       
+    <!-- Nav Header Component End -->
+        <!-- Footer Section End -->    
+    </composite:implementation>
+</html>

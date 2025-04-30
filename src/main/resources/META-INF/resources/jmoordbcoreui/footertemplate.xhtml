@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces"          
+      xmlns:c="jakarta.tags.core"
+      xmlns:composite="jakarta.faces.composite"
+      xmlns:f="jakarta.faces.core">
+    <composite:interface >
+        <composite:attribute name="footer" type="java.lang.Object"/> 
+
+    </composite:interface>
+    <composite:implementation>
+        <!-- Footer Section Start -->
+
+        <footer class="footer">
+            <div class="footer-body">
+                <ul class="left-panel list-inline mb-0 p-0">
+                    <li class="list-inline-item"><a href="#{cc.attrs.footer.privacyPolicyURL}">#{cc.attrs.footer.privacyPolicy}</a></li>
+                    <li class="list-inline-item"><a href="#{cc.attrs.footer.termsOfUseURL}">#{cc.attrs.footer.termsOfUse}</a></li>
+                </ul>
+                <div class="right-panel">
+                    © #{cc.attrs.footer.applicationTitle}
+                    <span class="">
+                        <h:graphicImage library="#{cc.attrs.footer.imageLibrary}" name="#{cc.attrs.footer.imageName}" />
+                    </span> #{cc.attrs.footer.by} <a class="nav-link " href="#{cc.attrs.footer.companyURL}">#{cc.attrs.footer.company}</a>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer Section End -->    
+    </composite:implementation>
+</html>
