@@ -14,6 +14,7 @@
     }
     let currentTab = 0;
     const ActiveTab = (n) => {
+        console.log("---> valor de n "+n);
         if (n == 0) {
             document.getElementById("account").classList.add("active");
             document.getElementById("account").classList.remove("done");
