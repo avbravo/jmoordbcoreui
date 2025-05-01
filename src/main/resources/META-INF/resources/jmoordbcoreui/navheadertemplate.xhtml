@@ -5,43 +5,62 @@
       xmlns:p="primefaces"          
       xmlns:c="jakarta.tags.core"
       xmlns:composite="jakarta.faces.composite"
-      xmlns:f="jakarta.faces.core">
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
     <composite:interface >
-     <composite:attribute name="templateBean" type="java.lang.Object"/> 
+        <composite:attribute name="templateBean" type="java.lang.Object"/> 
 
     </composite:interface>
     <composite:implementation>
-   <!-- Nav Header Component Start -->
-    <div class="iq-navbar-header" style="height: 215px;">
-        <div class="container-fluid iq-container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="flex-wrap d-flex justify-content-between align-items-center">
-                        <div>
-                            <h1>#{cc.attrs.templateBean.navHeaderTitle}</h1>
-                            <p>#{cc.attrs.templateBean.navHeaderMessage}</p>
-                        </div>
-                        <div>
-                            <a href="#{cc.attrs.templateBean.navHeaderHrefInfo.href}" class="btn btn-link btn-soft-light">
-                                <h:graphicImage library="#{cc.attrs.templateBean.navHeaderImageInfo.library}" name="#{cc.attrs.templateBean.navHeaderImageInfo.name}" />
-                                #{cc.attrs.templateBean.navHeaderHrefInfo.text}
-                            </a>
+        <!-- Nav Header Component Start -->
+        <div class="iq-navbar-header" style="height: 215px;">
+            <div class="container-fluid iq-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="flex-wrap d-flex justify-content-between align-items-center">
+                            <div>
+                                <h1>#{cc.attrs.templateBean.navHeader.title}</h1>
+                                <p>#{cc.attrs.templateBean.navHeader.message}</p>
+                            </div>
+                            <div>
+                                <a href="#{cc.attrs.templateBean.navHeader.hrefInfo.href}" class="btn btn-link btn-soft-light">
 
+                                    <c:if test="${cc.attrs.templateBean.navHeader.imageInfo.library eq 'primefaces'}">
+                                        <i class="#{cc.attrs.templateBean.navHeader.imageInfo.name}"></i>  
+                                    </c:if>
+                                    <c:if test="${cc.attrs.templateBean.navHeader.imageInfo.library ne 'primefaces'}">
+                                        <h:graphicImage library="#{cc.attrs.templateBean.navHeader.imageInfo.library}" name="#{cc.attrs.templateBean.navHeader.imageInfo.name}" />
+                                    </c:if>
+
+                                    #{cc.attrs.templateBean.navHeader.hrefInfo.text}
+                                </a>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="iq-header-img">
-            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header.png" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX"/>
-            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header1.png" alt="header" class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX"/>
-            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header2.png" alt="header" class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX"/>
-            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header3.png" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX"/>
-            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header4.png" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX"/>
-            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header5.png" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX"/>
-        </div>
-    </div>       
-    <!-- Nav Header Component End -->
+            <div class="iq-header-img">
+                <ui:repeat value="#{cc.attrs.templateBean.navHeader.imageInfos}" var="item">
+
+
+                    <c:if test="${item.library eq 'primefaces'}">
+                        <i class="#{item.name}"></i>  
+                    </c:if>
+                    <c:if test="${item.library ne 'primefaces'}">
+                        <h:graphicImage library="#{item.library}" name="#{item.name}" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX"/>
+                    </c:if>
+
+                </ui:repeat>
+                <!--            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header.png" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX"/>
+                            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header1.png" alt="header" class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX"/>
+                            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header2.png" alt="header" class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX"/>
+                            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header3.png" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX"/>
+                            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header4.png" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX"/>
+                            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header5.png" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX"/>-->
+            </div>
+        </div>       
+        <!-- Nav Header Component End -->
         <!-- Footer Section End -->    
     </composite:implementation>
 </html>

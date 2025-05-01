@@ -22,8 +22,14 @@
                 <div class="right-panel">
                     © #{cc.attrs.footer.applicationTitle}
                     <span class="">
-                        <h:graphicImage library="#{cc.attrs.footer.imageLibrary}" name="#{cc.attrs.footer.imageName}" />
-                    </span> #{cc.attrs.footer.by} <a class="nav-link " href="#{cc.attrs.footer.companyURL}">#{cc.attrs.footer.company}</a>
+                         <c:if test="${cc.attrs.footer.imageInfo.library eq 'primefaces'}">
+                                    <i class="#{cc.attrs.footer.imageInfo.name}"></i>  
+                                </c:if>
+                        <c:if test="${cc.attrs.footer.imageInfo.library ne 'primefaces'}">
+                            <h:graphicImage library="#{cc.attrs.footer.imageInfo.library}" name="#{cc.attrs.footer.imageInfo.name}" />
+                        </c:if>
+                       
+                    </span> #{cc.attrs.footer.by} <a class="nav-link " href="#{cc.attrs.footer.companyHrefInfo.href}">#{cc.attrs.footer.companyHrefInfo.text}</a>
                 </div>
             </div>
         </footer>
