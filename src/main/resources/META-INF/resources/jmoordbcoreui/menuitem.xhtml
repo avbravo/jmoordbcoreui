@@ -16,30 +16,23 @@
         <composite:attribute name="value" default=""/>
         <composite:attribute name="badgespanLabel" default=""/>
         <composite:attribute name="badgespanType" default="bg-success"/>
-        <!--typeIcon = svg, circle, primefaces-->
-        <composite:attribute name="typeIcon" default="circle"/>
-        <composite:attribute name="icon" default="pi pi-clock"/>
-        <composite:attribute name="svgLibrary" default="jmoordbcoreui"/>
-        <composite:attribute name="svgName" default="images/svg/dashboard.svg"/>
+        
+        <composite:attribute name="imageLibrary" default="jmoordbcoreui"/>
+        <composite:attribute name="imageName" default="images/svg/botones/menuitem.svg"/>
+        
     </composite:interface>
     <composite:implementation>
         <li class="nav-item">
             <a class="nav-link " href="#{cc.attrs.href}">
                 <i class="icon">
-                    <c:if test="${cc.attrs.typeIcon eq 'circle'}">
-                        <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
-                            <g>
-                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                            </g>
-                        </svg>
+                    <c:if test="${cc.attrs.imageLibrary eq 'primefaces'}">
+                        <i class="#{cc.attrs.imageName}"></i>  
                     </c:if>
-                    <c:if test="${cc.attrs.typeIcon eq 'svg'}">                                                      
-                        <h:graphicImage library="#{cc.attrs.svgLibrary}" name="#{cc.attrs.svgName}" />
+                    <c:if test="${cc.attrs.imageLibrary ne 'primefaces'}">
+                        <h:graphicImage library="#{cc.attrs.imageLibrary}" name="#{cc.attrs.imageName}" />
                     </c:if>
 
-                    <c:if test="${cc.attrs.typeIcon eq 'primefaces'}">
-                        <i class="#{cc.attrs.icon}"></i>  
-                    </c:if>
+
 
                 </i>
                 <i class="sidenav-mini-icon"> #{cc.attrs.min-value} </i>

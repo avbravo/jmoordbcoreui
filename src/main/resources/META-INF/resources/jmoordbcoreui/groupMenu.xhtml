@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"          
+      xmlns:composite="jakarta.faces.composite"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:c="jakarta.tags.core"
+      >
+    <composite:interface >
+        <composite:attribute name="text" default="Home"/>
+        <composite:attribute name="miniText" default="-"/>
+        <composite:attribute name="actionEvent" default="#"/>
+
+    </composite:interface>
+    <composite:implementation>
+              
+        <li class="nav-item static-item">
+            <a class="nav-link static-item disabled" href="#{cc.attrs.actionEvent}" tabindex="-1">
+                <span class="default-icon">#{cc.attrs.text}</span>
+                <span class="mini-icon">#{cc.attrs.miniText}</span>
+            </a>
+        </li>
+     
+    </composite:implementation>
+
+
+</html>
