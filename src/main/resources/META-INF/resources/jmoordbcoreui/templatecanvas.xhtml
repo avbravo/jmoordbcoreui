@@ -6,7 +6,7 @@
       xmlns:ui="jakarta.faces.facelets"
       >
     <composite:interface >
-        
+         <composite:attribute name="canva" type="java.lang.Object"/>
     </composite:interface>
      <composite:implementation>
   <!-- Toos Change Theme -->
@@ -17,33 +17,33 @@
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" data-bs-scroll="true" data-bs-backdrop="true" aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
                 <div class="d-flex align-items-center">
-                    <h3 class="offcanvas-title me-3" id="offcanvasExampleLabel">Settings</h3>
+                    <h3 class="offcanvas-title me-3" id="offcanvasExampleLabel">#{cc.attrs.canva.settings}</h3>
                 </div>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body data-scrollbar">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h5 class="mb-3">Scheme</h5>
+                        <h5 class="mb-3">#{cc.attrs.canva.scheme}</h5>
 
                         <div class="d-grid gap-3 grid-cols-3 mb-4">
                             <div class="btn btn-border" data-setting="color-mode" data-name="color" data-value="auto">
                                 <h:graphicImage library="jmoordbcoreui" name="images/svg/botones/auto.svg" />
-                                <span class="ms-2 "> Auto </span>
+                                <span class="ms-2 ">#{cc.attrs.canva.auto}</span>
                             </div>
 
                             <div class="btn btn-border" data-setting="color-mode" data-name="color" data-value="dark">
                                 <h:graphicImage library="jmoordbcoreui" name="images/svg/botones/dark.svg" />
-                                <span class="ms-2 "> Dark  </span>
+                                <span class="ms-2 ">#{cc.attrs.canva.dark} </span>
                             </div>
                             <div class="btn btn-border active" data-setting="color-mode" data-name="color" data-value="light">
                                 <h:graphicImage library="jmoordbcoreui" name="images/svg/botones/ligth.svg" />
-                                <span class="ms-2 "> Light</span>
+                                <span class="ms-2 ">#{cc.attrs.canva.light}</span>
                             </div>
                         </div>
                         <hr class="hr-horizontal"/> 
                         <div class="d-flex align-items-center justify-content-between">
-                            <h5 class="mt-4 mb-3">Color Customizer</h5>
+                            <h5 class="mt-4 mb-3">#{cc.attrs.canva.colorCustomizer}</h5>
                             <button class="btn btn-transparent p-0 border-0" data-value="theme-color-default" data-info="#079aa2" data-setting="color-mode1" data-name="color" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Default">
 
                                 <h:graphicImage library="jmoordbcoreui" name="images/svg/botones/customizer.svg" />
@@ -71,20 +71,20 @@
                         </div>
 
                         <hr class="hr-horizontal"/>
-                        <h5 class="mt-4 mb-3">Sidebar Color</h5>
+                        <h5 class="mt-4 mb-3">#{cc.attrs.canva.sidebarColor}</h5>
                         <div class="d-grid gap-3 grid-cols-2 mb-4">
                             <div class="btn btn-border d-block" data-setting="sidebar" data-name="sidebar-color" data-value="sidebar-white">
-                                <span class=""> Default </span>
+                                <span class="">#{cc.attrs.canva.defaultLabel}</span>
                             </div>
                             <div class="btn btn-border d-block" data-setting="sidebar" data-name="sidebar-color" data-value="sidebar-dark">
-                                <span class=""> Dark </span>
+                                <span class="">#{cc.attrs.canva.dark}</span>
                             </div>
                             <div class="btn btn-border d-block" data-setting="sidebar" data-name="sidebar-color" data-value="sidebar-color">
-                                <span class=""> Color </span>
+                                <span class=""> #{cc.attrs.canva.color}</span>
                             </div>
 
                             <div class="btn btn-border d-block" data-setting="sidebar" data-name="sidebar-color" data-value="sidebar-transparent">
-                                <span class=""> Transparent </span>
+                                <span class=""> #{cc.attrs.canva.transparent} </span>
                             </div>
                         </div>
 
