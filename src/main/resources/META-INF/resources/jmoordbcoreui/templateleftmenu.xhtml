@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"          
+      xmlns:composite="jakarta.faces.composite"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:jmoordbocoreui="http://jmoordbcoreui.com/taglib"
+      xmlns:yoss="jakarta.faces.composite/yoss"
+      >
+    <composite:interface >
+        <composite:attribute name="menuBar" type="java.lang.Object"/>
+        <!--<composite:attribute name="draw" default=""/>-->
+    </composite:interface>
+    <composite:implementation>
+
+        <div class="sidebar-body pt-0 data-scrollbar">
+            <div class="sidebar-list">
+                <!-- Sidebar Menu Start -->
+                 <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
+
+                     <h:outputText value="#{cc.attrs.menuBar.draw}" escape="false"/>
+    
+                </ul>
+            </div>
+        </div>
+    </composite:implementation>
+
+
+</html>
