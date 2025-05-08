@@ -51,6 +51,7 @@
                 <!-- Movil End -->           
 
                 <div class="input-group search-input">
+                  
                     <span class="input-group-text" id="search-input">
                         <h:graphicImage library="jmoordbcoreui" name="images/svg/botones/lupa.svg" />
                     </span>
@@ -63,22 +64,23 @@
                         <span class="navbar-toggler-bar bar3"></span>
                     </span>
                 </button>
+             
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
+                       
+                       
                         <li class="nav-item dropdown">
-                            <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a href="#" class="search-toggle nav-link" id="dropdownMenuButtonIdiomas" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <h:graphicImage library="#{cc.attrs.templateBean.topHeader.topHeaderLanguageDefault.imageLibrary}" name="#{cc.attrs.templateBean.topHeader.topHeaderLanguageDefault.imageName}" class="img-fluid rounded-circle" alt="user" style="height: 30px; min-width: 30px; width: 30px;"/>
                                 <span class="bg-primary"></span>
                             </a>
-                            <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
+                            <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButtonIdiomas">
                                 <div class="m-0 border-0 shadow-none card">
                                     <div class="p-0 ">
                                         <ul class="p-0 list-group list-group-flush">
                                             <ui:repeat value="#{cc.attrs.templateBean.topHeader.topHeaderLanguages}" var="topHeaderLanguage">
                                                 <li class="iq-sub-card list-group-item">
-                                                    <a class="p-0" href="#">  
-                                                        <h:graphicImage library="#{topHeaderLanguage.imageLibrary}" name="#{topHeaderLanguage.imageName}" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>#{topHeaderLanguage.text}</a>
-                                                </li>
+                                                    <a class="p-0" href="#"><h:graphicImage library="#{topHeaderLanguage.imageLibrary}" name="#{topHeaderLanguage.imageName}" alt="img-flaf" class="img-fluid me-2" style="width: 15px;height: 15px;min-width: 15px;"/>#{topHeaderLanguage.text}</a></li>
                                             </ui:repeat>                  
                                         </ul>
                                     </div>
