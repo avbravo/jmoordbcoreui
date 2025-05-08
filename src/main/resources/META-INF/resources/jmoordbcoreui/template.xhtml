@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"          
+      xmlns:composite="jakarta.faces.composite"
+      xmlns:jmoordbcoreui="http://jmoordbcoreui.com/taglib"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:yoss="jakarta.faces.composite/yoss"
+
+      xmlns:c="jakarta.tags.core">
+    <composite:interface >
+        <composite:attribute name="templateBean" type="java.lang.Object"/> 
+    </composite:interface>
+    <composite:implementation>
+        <!-- Footer Section Start -->
+
+        <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all ">
+            <div class="sidebar-header d-flex align-items-center justify-content-start">
+                <a href="dashboard.xhtml" class="navbar-brand">
+                    <!--Logo start-->
+                    <!--logo End-->
+
+                    <!--Logo start-->
+                    <div class="logo-main">
+                        <!--Logo start-->
+                        <div class="logo-main">
+                            <div class="logo-normal">
+                                <c:if test="${cc.attrs.templateBean.imageInfoLogoNormal.library eq 'primefaces'}">
+                                    <i class="#{cc.attrs.templateBean.imageInfoLogoNormal.name}"></i>  
+                                </c:if>
+                                <c:if test="${cc.attrs.templateBean.imageInfoLogoNormal.library ne 'primefaces'}">
+                                    <h:graphicImage library="#{cc.attrs.templateBean.imageInfoLogoNormal.library}" name="#{cc.attrs.templateBean.imageInfoLogoNormal.name}" />
+                                </c:if>
+
+                            </div>
+                        </div>
+                        <div class="logo-mini">
+                            <c:if test="${cc.attrs.templateBean.imageInfoLogoMini.library eq 'primefaces'}">
+                                <i class="#{cc.attrs.templateBean.imageInfoLogoMini.name}"></i>  
+                            </c:if>
+                            <c:if test="${cc.attrs.templateBean.imageInfoLogoMini.library ne 'primefaces'}">
+                                <h:graphicImage library="#{cc.attrs.templateBean.imageInfoLogoMini.library}" name="#{cc.attrs.templateBean.imageInfoLogoMini.name}" />
+                            </c:if>
+                        </div>
+                    </div>
+                    <!--logo End-->
+
+                    <h4 class="logo-title">#{cc.attrs.templateBean.logoTitle}</h4>
+                </a>
+                <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
+                    <i class="icon">
+                        <h:graphicImage library="jmoordbcoreui" name="images/svg/flechas/flechaatras.svg" />
+                    </i>
+                </div>
+            </div>
+
+          <jmoordbcoreui:templateleftmenu menuBar="#{cc.attrs.templateBean.menuBar}"/>
+            <!---<ui:include src="./leftmenu.xhtml" />-->
+
+
+
+            <div class="sidebar-footer"></div>
+        </aside>   
+
+
+        <main class="main-content">
+
+            <!--
+            main-content
+            -->
+
+
+
+            <div class="position-relative iq-banner">
+
+                <!--Nav Start-->
+                <jmoordbcoreui:templatetopheader templateBean="#{cc.attrs.templateBean}"/>
+                <!--<ui:include src="./topheader.xhtml" />-->
+                <!-- Nav Header Component Start -->
+
+                <!-- Nav Header Component End -->
+
+                <!--<ui:include src="./navheader.xhtml" />-->
+                <jmoordbcoreui:templatenavheader templateBean="#{cc.attrs.templateBean}"/>
+
+                <!--Nav End-->
+            </div>
+            <div class="conatiner-fluid content-inner mt-n5 py-0">
+                <div class="row">
+                    <ui:insert name="content">Default Content</ui:insert>
+                    <!--<ui:include src="./content.xhtml" />-->
+                    <!-- Footer Section Start -->
+                    <!--<ui:include src="./footer.xhtml" />-->
+                    <!-- Footer Section End -->   
+                </div>
+            </div>
+            <!-- Download inicio -->
+
+            <div class="btn-download">
+
+            </div>
+
+            <!--<ui:include src="./footer.xhtml" />-->
+            <jmoordbcoreui:templatefooter footer="#{cc.attrs.templateBean.footer}"/>
+
+            <!-- Download fin -->
+
+        </main>
+
+        <jmoordbcoreui:templatecanvas canva="#{cc.attrs.templateBean.canva}"/>
+
+        <!-- Footer Section End -->    
+    </composite:implementation>
+</html>
