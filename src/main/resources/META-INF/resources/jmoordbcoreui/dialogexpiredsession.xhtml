@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces"          
+      xmlns:c="jakarta.tags.core"
+      xmlns:composite="jakarta.faces.composite"
+      xmlns:f="jakarta.faces.core">
+    <composite:interface >
+
+
+
+    </composite:interface>
+    <composite:implementation>
+
+        <p:dialog widgetVar="sessionWarningDialog" modal="true" header="#{core['dialogexpiredsession.header']}">
+            <h:panelGrid columns="1">
+                <h:outputText value="#{core['dialogexpiredsession.titulo1']}"/>
+                <h:outputText value="#{core['dialogexpiredsession.titulo2']}"/>
+                <p:commandButton value="#{core['dialogexpiredsession.commanduttoncontinuar']}" 
+                                 oncomplete="PF('sessionWarningDialog').hide(); resetSessionTimer();"
+                                 />
+            </h:panelGrid>
+        </p:dialog>
+    </composite:implementation>
+</html>
