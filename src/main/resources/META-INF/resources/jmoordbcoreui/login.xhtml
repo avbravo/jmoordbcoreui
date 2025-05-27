@@ -5,44 +5,53 @@
       xmlns:p="primefaces"          
       xmlns:c="jakarta.tags.core"
       xmlns:composite="jakarta.faces.composite"
-      xmlns:f="jakarta.faces.core">
+      xmlns:f="jakarta.faces.core"
+      xmlns:jmoordbcoreui="http://jmoordbcoreui.com/taglib">
     <composite:interface >
         <!--design = simple, profile-->
-        <composite:attribute name="design" default="simple"/> 
-        <composite:attribute name="usernameField" type="java.lang.Object"/> 
-        <composite:attribute name="passwordField"  type="java.lang.Object" />
-        <composite:attribute name="rememberMeField"  type="java.lang.Object" />
-        <composite:attribute name="profileSelected"  type="java.lang.Object" />
+        <composite:attribute name="design" default="profile"/> 
+        <composite:attribute name="usernameField" type="java.lang.Object" default="username"/> 
+        <composite:attribute name="passwordField"  type="java.lang.Object"  default ="password"/>
+        <composite:attribute name="rememberMeField"  type="java.lang.Object" default ="rememberMe" />
         <composite:attribute name="isLogged"  default="isLogged" />
+        <composite:attribute name="userLogged"  type="java.lang.Object"  default="#{loginFaces.userLogged}"/>
 
         <!-- 
         Controller
         -->
-        <composite:attribute name="controller" type="java.lang.Object"/> 
+        <composite:attribute name="controller" type="java.lang.Object" default="#{loginFaces}"/> 
         <composite:attribute name="loginAction"  default="login" />
-        <composite:attribute name="olvidoPasswordAction"  default="login" />
-        <composite:attribute name="registrarseAction"  default="login" />
+        <composite:attribute name="nextAction"  default="next" />
+        <composite:attribute name="backAction"  default="back" />
+        <composite:attribute name="logout"  default="logout" />
+        <composite:attribute name="nextButtonLabel"  default="Siguiente" />
+        <composite:attribute name="backButtonLabel"  default="Atras" />
+        <composite:attribute name="goDashboard"  default="goDashboard" />
+        <composite:attribute name="olvidoPasswordAction"  default="recoverypassword.xhtml" />
+        <composite:attribute name="isValidUser"  default="isValidUser" />
 
 
         <!--
         Renderer 
         -->
-        <composite:attribute name="signOtherAccountsRendered" default="true"/>
+        <composite:attribute name="signOtherAccountsRendered" default="false"/>
         <!--
         CommandButton
         -->
         <composite:attribute name="signButtonLabel" default="Iniciar Sesión"/>
+        <composite:attribute name="logoutButtonLabel" default="Cerrar Sesión"/>
+        <composite:attribute name="dashboardButtonLabel" default="Dashboard"/>
         <!--
         Label
         -->
-        <composite:attribute name="title" default="Cargo Dev UI"/>
-        <composite:attribute name="profileLabel" default="Perfil"/>
+        <composite:attribute name="title" default="#{conf['application.title']}"/>
+        <composite:attribute name="profileLabel" default="#{core['login.profile']}"/>
         <composite:attribute name="subtitle" default="Sign in"/>
         <composite:attribute name="subtitle2" default="Iniciar sesión para permanecer conectado."/>
-        <composite:attribute name="usernameLabel" default="Email"/>
-        <composite:attribute name="passwordLabel" default="Password"/>
-        <composite:attribute name="rememberLabel" default="Recordarme"/>
-        <composite:attribute name="forgotPasswordLabel" default="Olvido password"/>
+        <composite:attribute name="usernameLabel" default="#{core['login.username']}"/>
+        <composite:attribute name="passwordLabel" default="#{core['login.password']}"/>
+        <composite:attribute name="rememberLabel" default="#{core['login.remeber']}"/>
+        <composite:attribute name="forgotPasswordLabel" default="#{core['login.forgotpassword']}"/>
         <composite:attribute name="signOtherAccountsLabel" default="¿o iniciar sesión con otras cuentas?"/>
         <composite:attribute name="dontHaveanAccountLabel" default="¿No tienes una cuenta?"/>
         <composite:attribute name="clickHereToSignUpLabel" default="Haga clic aquí para registrarse"/>
@@ -57,7 +66,14 @@
         <composite:attribute name="logoMiniImageLibrary" default="jmoordbcoreui"/>
         <composite:attribute name="logoMiniImageName" default="images/avatars/02.png"/>
         <composite:attribute name="logoMiniImageSize" default="width:20px;"/>
-
+        <composite:attribute name="rigthImageLibrary" default="images"/>
+        
+        <composite:attribute name="rigthImageName" default="official/background/rigth.png"/>
+        <composite:attribute name="logoNormalImageLibrary" default="images"/>
+        <composite:attribute name="logoNormalImageName" default="official/logo/normal.png"/>
+        <composite:attribute name="logoMiniImageLibrary" default="images"/>
+        <composite:attribute name="logoMiniImageName" default="official/logo/small.png"/>
+        <composite:attribute name="logoMiniImageSize" default="width:20px;"/>
 
     </composite:interface>
     <composite:implementation>
@@ -87,93 +103,164 @@
                                         <h4 class="logo-title ms-3">#{cc.attrs.title}</h4>
                                         <!--Logo start-->
 
-                                        <!--logo End-->
-                                        <h2 class="mb-2 text-center">#{cc.attrs.subtitle}</h2>
-                                        <p class="text-center">#{cc.attrs.subtitle2}</p>
+                                        <c:if test="${cc.attrs.controller[cc.attrs.isLogged] eq false}">
 
+                                            <!--logo End-->
+                                            <h2 class="mb-2 text-center">#{cc.attrs.subtitle}</h2>
+                                            <p class="text-center">#{cc.attrs.subtitle2}</p>
+                                        </c:if>
                                         <!--<form>-->
 
-                                   
+
 
                                         <c:if test="${cc.attrs.controller[cc.attrs.isLogged] eq false}">
 
                                             <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <label for="username" class="form-label">#{cc.attrs.usernameLabel}</label>
-                                                        <p:inputText  placeholder="#{cc.attrs.usernameLabel}" 
-                                                                      class="form-control"
-                                                                      value="#{cc.attrs.controller[cc.attrs.usernameField]}"
-                                                                      id="username"
-                                                                      />
+
+                                                <c:if test="${cc.attrs.controller[cc.attrs.isValidUser] eq false}">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="username" class="form-label">#{cc.attrs.usernameLabel}</label>
+                                                            <p:inputText  placeholder="#{cc.attrs.usernameLabel}" 
+                                                                          class="form-control"
+                                                                          value="#{cc.attrs.controller[cc.attrs.usernameField]}"
+                                                                          id="username"
+                                                                          />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <label for="password" class="form-label">#{cc.attrs.passwordLabel}</label>
-                                                        <p:password  class="form-control" id="password"  placeholder="#{cc.attrs.passwordLabel}"
-                                                                     value="#{cc.attrs.controller[cc.attrs.passwordField]}"
-                                                                     />
+                                                </c:if>
+                                                <c:if test="${cc.attrs.controller[cc.attrs.isValidUser] eq true}">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <p:outputLabel class="form-control"
+                                                                           value="#{cc.attrs.userLogged.name}"
+                                                                           />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12 d-flex justify-content-between">
-                                                    <div class="form-check mb-3">
-                                                        <p:selectBooleanCheckbox value="#{cc.attrs.rememberMeField}" itemLabel="#{cc.attrs.rememberLabel}"/>
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label for="password" class="form-label">#{cc.attrs.passwordLabel}</label>
+                                                            <p:password  class="form-control" id="password"  placeholder="#{cc.attrs.passwordLabel}"
+                                                                         value="#{cc.attrs.controller[cc.attrs.passwordField]}"
+                                                                         toggleMask="true" redisplay="true"
+                                                                         />
+                                                        </div>
                                                     </div>
-                                                    <a href="recoverypassword.xhtml">#{cc.attrs.forgotPasswordLabel}</a>
-                                                </div>                                                              
+                                                    <div class="col-lg-12 d-flex justify-content-between">
+                                                        <div class="form-check mb-3">
+                                                            <!--<p:selectBooleanCheckbox value="#{cc.attrs.rememberMeField}" itemLabel="#{cc.attrs.rememberLabel}"/>-->
+                                                        </div>
+                                                        <a href="#{cc.attrs.olvidoPasswordAction}">#{cc.attrs.forgotPasswordLabel}</a>
+                                                    </div>    
+
+                                                    <c:if test="${cc.attrs.design eq 'profile'}">
+                                                        <div class="ui-fluid formgrid grid">
+                                                            <div class="field col-12 md:col-4">
+                                                                <p:outputLabel for="@next" value="#{cc.attrs.profileLabel}"/>
+
+                                                                <p:selectOneListbox id="profile" value="#{loginFaces.profileLogged}" 
+                                                                                    filter="false" filterMatchMode="contains" filterNormalize="true"
+                                                                                    scrollHeight="150"
+                                                                                    >
+
+                                                                    <f:selectItems value="#{loginFaces.profileLoggeds}" 
+                                                                                   var="var" 
+                                                                                   itemValue="#{var}" itemLabel="#{var.role.role } - #{var.departamentView.shortname} " />
+
+                                                                    <!--                                <p:column>
+                                                                    
+                                                                                                        <i class="pi pi-check"></i>
+                                                                                                    </p:column>-->
+
+
+                                                                </p:selectOneListbox>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="ui-fluid formgrid grid">
+                                                            <div class="row">
+
+                                                            </div>
+                                                            <div class="row">
+
+                                                            </div>
+                                                        </div>
+                                                    </c:if>
+
+
+                                                </c:if>
+
+
+
+
+
                                             </div>
 
-                                            <c:if test="${cc.attrs.design eq 'profile'}">
-                                                <div class="ui-fluid formgrid grid">
-                                                    <div class="field col-12 md:col-4">
-                                                        <p:outputLabel for="@next" value="#{cc.attrs.profileLabel}"/>
-                                                        <p:selectOneMenu id="option" value="#{cc.attrs.controller[cc.attrs.profileSelected]}">
-                                                            <f:selectItem itemLabel="Select One" itemValue=""/>
-                                                            <f:selectItem itemLabel="Option1" itemValue="Option1"/>
-                                                            <f:selectItem itemLabel="Option2" itemValue="Option2"/>
-                                                            <f:selectItem itemLabel="Option3" itemValue="Option3"/>
-                                                            <f:facet name="footer">
-                                                                <p:divider styleClass="mt-0" />
-                                                                <h:outputText value="3 options" style="font-weight:bold;"/>
-                                                            </f:facet>
-                                                        </p:selectOneMenu>
-                                                    </div>
-                                                </div>
-                                                <div class="ui-fluid formgrid grid">
-                                                    <div class="row">
+                                            <div class="row"></div>
+                                            <div class="row"></div>
+                                            <div class="row">
+                                                <c:if test="${cc.attrs.controller[cc.attrs.isValidUser] eq false}">
+                                                    <div class="d-flex justify-content-center">
+                                                        <p:commandButton value ="#{cc.attrs.nextButtonLabel}" 
+                                                                         action="#{cc.attrs.controller[cc.attrs.nextAction]}"
+                                                                         icon="pi pi-arrow-right"
+                                                                         update="growl, formLogin"
+                                                                         id="commandButtonNext"                                                             
+                                                                         styleClass="ui-button-secondary"/>
 
                                                     </div>
-                                                    <div class="row">
+                                                </c:if>
+                                                <c:if test="${cc.attrs.controller[cc.attrs.isValidUser] eq true}">
+                                                    <div class="d-flex justify-content-center">
+                                                        <p:commandButton value ="#{cc.attrs.signButtonLabel}" 
+                                                                         action="#{cc.attrs.controller[cc.attrs.loginAction]}"
+                                                                         icon="pi pi-user"
+                                                                         update="growl, formLogin"
+                                                                         id="commandButtonLogin"                                                             
+                                                                         styleClass="ui-button-primary"/>
+                                                        |
+                                                        <p:commandButton value ="#{cc.attrs.backButtonLabel}" 
+                                                                         action="#{cc.attrs.controller[cc.attrs.backAction]}"
+                                                                         icon="pi pi-chevron-left"
+                                                                         update="growl, formLogin"
+                                                                         id="commandButtoBack"                                                             
+                                                                         styleClass="ui-button-danger"/>
 
                                                     </div>
-                                                </div>
-                                            </c:if>
-                                            <div class="d-flex justify-content-center">
-                                                <p:commandButton value ="#{cc.attrs.signButtonLabel}" 
-                                                                 action="#{cc.attrs.controller[cc.attrs.loginAction]}"
-                                                                 icon="pi pi-user"
-                                                                 update="growl"
-                                                                 id="commandButtonLogin"                                                             
-                                                                 class="btn btn-primary"/>
-
+                                                </c:if>
                                             </div>
                                         </c:if> 
 
-     <c:if test="${cc.attrs.controller[cc.attrs.isLogged] eq true}">
-                                            <h1>isLogged true</h1>
-                                             <div class="row">
+                                        <!--Logeado-->
+                                        <c:if test="${cc.attrs.controller[cc.attrs.isLogged] eq true}">
+
+                                            <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
-                                                        <label for="username" class="form-label">#{cc.attrs.usernameLabel}</label>
-                                                        <p:outputLabel  placeholder="#{cc.attrs.usernameLabel}" 
-                                                                      class="form-control"
-                                                                      value="#{cc.attrs.controller[cc.attrs.usernameField]}"
-                                                                      id="username"
-                                                                      />
+                                                        <p:outputLabel class="form-control"
+                                                                       value="#{cc.attrs.userLogged.name}"
+                                                                       id="username"
+                                                                       />
                                                     </div>
                                                 </div>
-                                                                                                
+                                                <div class="d-flex justify-content-center">
+                                                    <p:commandButton value ="#{cc.attrs.dashboardButtonLabel}" 
+                                                                     action="#{cc.attrs.controller[cc.attrs.goDashboard]}"
+                                                                     icon="pi pi-home"
+                                                                     update="growl, formLogin"
+                                                                     id="commandButtonDashboard"                                                             
+                                                                     styleClass="ui-button-secondary"/>
+                                                    |
+                                                    <p:commandButton value ="#{cc.attrs.logoutButtonLabel}" 
+                                                                     action="#{cc.attrs.controller[cc.attrs.logout]}"
+                                                                     icon="pi pi-sign-out"
+                                                                     update="growl, formLogin"
+                                                                     id="commandButtonLogout"                                                             
+                                                                     styleClass="ui-button-danger"/>
+
+                                                </div>
+
                                             </div>
 
                                         </c:if> 
@@ -216,7 +303,8 @@
                 </div>
             </section>
         </div>
-
+              <jmoordbcoreui:dialogexpiredsession/>
+              
         <p:growl id="growl" showDetail="true" />
     </composite:implementation>
 </html>
