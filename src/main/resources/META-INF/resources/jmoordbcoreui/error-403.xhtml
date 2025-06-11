@@ -13,9 +13,10 @@
         <!--
         Imagenes
         -->
-       
+      
         <composite:attribute name="imageLibrary" default="jmoordbcoreui"/>
         <composite:attribute name="imageName" default="images/error/403.png"/>
+        <composite:attribute name="indexPath"  default="..#{microprofileConfigReader.getApplicativePath()}/index.xhtml"/>
       
 
     </composite:interface>
@@ -28,7 +29,12 @@
                     <h2 class="mb-0 mt-4 text-white">#{core['info.accesodenegado']}</h2>
                     <p class="mt-2 text-white">#{core['subtitle.accesodenegadosinpermiso']}</p>
                     <a class="btn bg-white text-primary d-inline-flex align-items-center" href="../index.xhtml">#{core['button.home']}</a>
+                   
                 </div>
+                 <p:outputLabel value="cc.attrs.pathIndex = #{cc.attrs.pathIndex}"/>
+                    <a class="btn bg-white text-primary d-inline-flex align-items-center" href="#{cc.attrs.indexPath}">#{core['button.home']}</a>
+                     <p:outputLabel value="cc.attrs.pathIndex = #{cc.attrs.pathIndex}"/>
+                    <a class="btn bg-white text-primary d-inline-flex align-items-center" href="..#{microprofileConfigReader.getApplicativePath()}">Direct</a>
                 <div class="box">
                     <div class="c xl-circle">
                         <div class="c lg-circle">
